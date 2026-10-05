@@ -32,7 +32,7 @@
   revealObserver=new window.IntersectionObserver(entries=>{
    for(const e of entries){if(!e.isIntersecting)continue;const item=revealByElement.get(e.target);if(!item||item.seen)continue;item.seen=true;item.delay=performance.now()+item.order*85;revealObserver.unobserve(e.target);}
    wake();
-  },{threshold:.06,rootMargin:'0px 0px 25px 0px'});
+  },{threshold:0,rootMargin:'0px 0px 25px 0px'});
   reveals.forEach(x=>{if(!x.seen)revealObserver.observe(x.el);});
  }else{reveals.forEach(x=>{x.seen=true;x.s.target=1;});}
  function addScrub(selector,parentSelector,apply){
