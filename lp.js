@@ -18,26 +18,13 @@ document.addEventListener('keydown',e=>{
   else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
  }
 });
-const titles={A:'糸リフト6本 ＋ ヒアルロン酸1cc',B:'糸リフト6本 ＋ ポテンツァ',C:'貴族リフト ＋ 医療ハイフ'};
-const cases=[
- ...Array.from({length:6},(_,i)=>({set:['A','B','C'][i%3],name:titles[['A','B','C'][i%3]],image:'ai-case-'+(i+1)+'.png',ai:true}))
-];
+const titles={A:'STRUCTURE / 輪郭のバランス',B:'SKIN / 肌の印象',C:'BEAUTY DESIGN / 立体感'};
+const cases=Array.from({length:6},(_,i)=>({set:['A','B','C'][i%3],name:titles[['A','B','C'][i%3]],image:'ai-case-'+(i+1)+'.png'}));
 const list=document.getElementById('case-list');
 for(const [index,item] of cases.entries()){
- const id='case-'+index;
- const card=document.createElement('article');card.className='case-card';card.dataset.set=item.set;
- const caption=`<div class="case-caption"><span>${item.set}</span><div><h3>${item.name}</h3><small>AI生成 / 実際の患者様ではありません</small></div></div>`;
- card.innerHTML=caption+`<div class="comparison photo-comparison" id="comparison-${id}" aria-label="AI比較デモ。画像上を左右にドラッグできます"><div class="compare-after"><img src="${item.image}" alt="AI生成の同一女性のAfter側の比較デモ。施術効果ではありません" loading="lazy" draggable="false"><span class="image-label">AFTER / DEMO</span></div><div class="compare-before"><img src="${item.image}" alt="AI生成の同一女性のBefore側の比較デモ。実際の患者様ではありません" loading="lazy" draggable="false"><span class="image-label">BEFORE / DEMO</span></div><span class="demo-watermark">AI GENERATED / 比較デモ</span><div class="split-line"></div></div><div class="comparison-controls"><label for="slider-${id}">写真上をドラッグしてBefore / Afterを比較</label><input type="range" id="slider-${id}" min="0" max="100" value="50" aria-label="${item.set}セットのAI比較デモ" aria-controls="comparison-${id}"><output class="comparison-output" for="slider-${id}"></output><div class="compare-buttons"><button type="button" data-position="100" aria-pressed="false">Before</button><button type="button" data-position="50" aria-pressed="true">比較</button><button type="button" data-position="0" aria-pressed="false">After</button></div></div><p class="case-details">AI生成のレイアウト見本です。<br>施術による変化・効果を示す写真ではありません。</p>`;
+ const card=document.createElement('article');card.className='case-card concept-card';card.dataset.set=item.set;
+ card.innerHTML=`<figure class="concept-photo"><img src="${item.image}" alt="架空の女性の美容コンセプト。ビジュアルや治療前後を示す写真ではありません" loading="lazy" decoding="async" draggable="false"><span>BEAUTY DESIGN ${String(index+1).padStart(2,'0')}</span></figure><div class="case-caption"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${item.name}</h3><small>AI CONCEPT / 施術効果を示すものではありません</small></div></div>`;
  list.appendChild(card);
- const stage=card.querySelector('.comparison'),range=card.querySelector('input'),output=card.querySelector('output'),buttons=card.querySelectorAll('[data-position]');
- const update=raw=>{const value=Math.round(Math.min(100,Math.max(0,Number(raw))));stage.style.setProperty('--split',value+'%');range.value=String(value);range.setAttribute('aria-valuetext',`Before ${value}%、After ${100-value}%`);output.textContent=`BEFORE ${value}% / AFTER ${100-value}%`;buttons.forEach(b=>{const selected=Number(b.dataset.position)===value;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});};
- range.addEventListener('input',e=>update(e.target.value));buttons.forEach(b=>b.addEventListener('click',()=>update(b.dataset.position)));
- let dragging=false;
- const updateFromPointer=e=>{const rect=stage.getBoundingClientRect();if(rect.width>0)update((e.clientX-rect.left)/rect.width*100);};
- stage.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;dragging=true;stage.setPointerCapture?.(e.pointerId);updateFromPointer(e);});
- stage.addEventListener('pointermove',e=>{if(dragging)updateFromPointer(e);});
- for(const type of ['pointerup','pointercancel','lostpointercapture'])stage.addEventListener(type,()=>{dragging=false;});
- update(50);
 }
 const dots=document.querySelector('.carousel-dots'),count=document.querySelector('.carousel-count');
 let current=0;
@@ -56,7 +43,7 @@ const autoplayButton=document.querySelector('.carousel-autoplay');
 let autoplay=!reduced(),inView=!('IntersectionObserver' in window),hovering=false,focused=false,pointerActive=false;
 let lastAdvance=Date.now(),resumeAfter=0;
 function delayAutoplay(){resumeAfter=Date.now()+10000;}
-function syncAutoplayButton(){autoplayButton.textContent=autoplay?'Ⅱ 自動再生を停止':'▷ 自動再生を開始';autoplayButton.setAttribute('aria-label',autoplay?'症例の自動再生を一時停止':'症例の自動再生を開始');autoplayButton.setAttribute('aria-pressed',String(!autoplay));count.setAttribute('aria-live',autoplay?'off':'polite');}
+function syncAutoplayButton(){autoplayButton.textContent=autoplay?'Ⅱ 自動再生を停止':'▷ 自動再生を開始';autoplayButton.setAttribute('aria-label',autoplay?'ビジュアルの自動再生を一時停止':'ビジュアルの自動再生を開始');autoplayButton.setAttribute('aria-pressed',String(!autoplay));count.setAttribute('aria-live',autoplay?'off':'polite');}
 autoplayButton.addEventListener('click',()=>{autoplay=!autoplay;lastAdvance=Date.now();syncAutoplayButton();});
 carousel.addEventListener('mouseenter',()=>{hovering=true;});
 carousel.addEventListener('mouseleave',()=>{hovering=false;delayAutoplay();});

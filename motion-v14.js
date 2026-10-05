@@ -18,7 +18,7 @@
  const timeline=document.querySelector('.brand-timeline');
  function wake(){if(!raf&&!document.hidden&&!media.matches){raf=window.requestAnimationFrame(frame);}}
  const titleSelector='.motion-heading-line';
- const revealSelector='.set-card,.cross-photo>article,.heritage-mosaic>div,.brand-timeline li,.philosophy article,.layers article,.diagnosis-flow article,.point-item,.reason-card,.doctor-card,.price-package,.clinic-gallery>div';
+ const revealSelector='.set-card,.cross-photo>article,.heritage-mosaic>div,.brand-timeline li,.philosophy article,.layers article,.diagnosis-flow article,.point-item,.reason-card,.doctor-card,.price-package,.clinic-gallery>div,.beauty-link,.story-bridge';
  const revealElements=[...document.querySelectorAll(titleSelector),...document.querySelectorAll(revealSelector)];
  for(const [i,el] of revealElements.entries()){
   const rect=el.getBoundingClientRect();const above=rect.bottom<0;
@@ -46,9 +46,10 @@
  addScrub('.about-swirl','.about',(el,p)=>{el.style.transform=`translate3d(${(p-.5)*65}px,${(p-.5)*-85}px,0) rotate(${p*16-8}deg)`;});
  addScrub('.cross-photo>article>img','.cross-photo',(el,p)=>{el.style.transform=`translate3d(0,${(p-.5)*-52}px,0) scale(1.1)`;});
  addScrub('.heritage-mosaic>div>img','.heritage-mosaic',(el,p)=>{el.style.transform=`translate3d(0,${(p-.5)*-32}px,0) scale(1.07)`;});
+ addScrub('.journey-chapter figure img','.journey-chapter',(el,p)=>{el.style.transform=`translate3d(0,${(p-.5)*-32}px,0) scale(1.08)`;});
  if(timeline)scrubs.push({el:timeline,parent:timeline,s:spring(0),active:true,apply:(el,p)=>el.style.setProperty('--timeline-progress',`${clamp((p-.15)/.7)*100}%`)});
  // Reveal uses translate, while pointer tilt uses rotate: transforms do not compete.
- document.querySelectorAll('.set-card,.price-package,.portrait-stage,.rich-line-cta').forEach(el=>{
+ document.querySelectorAll('.set-card,.price-package,.portrait-stage,.rich-line-cta,.beauty-link').forEach(el=>{
   const item={el,x:spring(0),y:spring(0),lift:spring(0),active:false};hovers.push(item);
   el.addEventListener('pointermove',e=>{
    if(!fine.matches||media.matches||e.pointerType==='touch')return;
