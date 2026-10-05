@@ -23,7 +23,7 @@ const cases=Array.from({length:6},(_,i)=>({set:['A','B','C'][i%3],name:titles[['
 const list=document.getElementById('case-list');
 for(const [index,item] of cases.entries()){
  const card=document.createElement('article');card.className='case-card concept-card';card.dataset.set=item.set;
- card.innerHTML=`<figure class="concept-photo"><img src="${item.image}" alt="架空の女性の美容コンセプト。ビジュアルや治療前後を示す写真ではありません" loading="lazy" decoding="async" draggable="false"><span>BEAUTY DESIGN ${String(index+1).padStart(2,'0')}</span></figure><div class="case-caption"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${item.name}</h3><small>AI CONCEPT / 施術効果を示すものではありません</small></div></div>`;
+ card.innerHTML=`<figure class="concept-photo"><img src="${item.image}" alt="架空の女性の美容コンセプト。患者様の症例や治療前後を示す写真ではありません" loading="lazy" decoding="async" draggable="false"><span>BEAUTY DESIGN ${String(index+1).padStart(2,'0')}</span></figure><div class="case-caption"><span>${String(index+1).padStart(2,'0')}</span><div><h3>${item.name}</h3><small>AI CONCEPT / 施術効果を示すものではありません</small></div></div>`;
  list.appendChild(card);
 }
 const dots=document.querySelector('.carousel-dots'),count=document.querySelector('.carousel-count');
