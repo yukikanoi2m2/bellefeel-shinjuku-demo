@@ -22,18 +22,21 @@
  const revealElements=[...document.querySelectorAll(titleSelector),...document.querySelectorAll(revealSelector)];
  for(const [i,el] of revealElements.entries()){
   const rect=el.getBoundingClientRect();const above=rect.bottom<0;
-  const item={el,s:spring(above?1:0),seen:above,delay:0,order:el.matches(titleSelector)?i%2:i%3};
+  const visible=rect.top<(window.innerHeight||800)&&rect.bottom>0;
+  const item={el,s:spring(above?1:0),seen:above||visible,delay:0,order:el.matches(titleSelector)?i%2:i%3};
   el.classList.add('motion-reveal');el.style.setProperty('--reveal-opacity','1');
   reveals.push(item);
  }
- const revealByElement=new Map(reveals.map(x=>[x.el,x]));
+ // Observe the unclipped heading wrapper; clipping a text line changes its intersection area.
+ const revealByElement=new Map();
+ for(const item of reveals){const target=item.el.matches(titleSelector)?item.el.parentElement:item.el;item.observed=target;const list=revealByElement.get(target)||[];list.push(item);revealByElement.set(target,list);}
  let revealObserver;
  if('IntersectionObserver' in window){
   revealObserver=new window.IntersectionObserver(entries=>{
-   for(const e of entries){if(!e.isIntersecting)continue;const item=revealByElement.get(e.target);if(!item||item.seen)continue;item.seen=true;item.delay=performance.now()+item.order*85;revealObserver.unobserve(e.target);}
+   for(const e of entries){if(!e.isIntersecting)continue;const items=revealByElement.get(e.target)||[];for(const item of items){if(item.seen)continue;item.seen=true;item.delay=performance.now()+item.order*85;}revealObserver.unobserve(e.target);}
    wake();
   },{threshold:0,rootMargin:'0px 0px 25px 0px'});
-  reveals.forEach(x=>{if(!x.seen)revealObserver.observe(x.el);});
+  for(const [target,items] of revealByElement){if(items.some(x=>!x.seen))revealObserver.observe(target);}
  }else{reveals.forEach(x=>{x.seen=true;x.s.target=1;});}
  function addScrub(selector,parentSelector,apply){
   document.querySelectorAll(selector).forEach(el=>{const parent=el.closest(parentSelector)||el;const item={el,parent,s:spring(.5),active:true,apply};scrubs.push(item);});
