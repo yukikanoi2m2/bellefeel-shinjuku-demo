@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(noto-sans-jp-400-v13.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(noto-sans-jp-500-v13.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(noto-sans-jp-600-v13.ttf) format('truetype');
+}

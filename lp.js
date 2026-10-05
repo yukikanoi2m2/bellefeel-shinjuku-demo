@@ -1,0 +1,75 @@
+'use strict';
+const menuButton = document.querySelector('.menu-button');
+const navigation = document.querySelector('.navigation');
+const overlay = document.querySelector('.overlay');
+function closeMenu() { menuButton.classList.remove('active'); menuButton.setAttribute('aria-expanded','false'); menuButton.setAttribute('aria-label','メニューを開く'); navigation.classList.remove('open'); navigation.inert=true; overlay.hidden=true; document.body.classList.remove('menu-open'); }
+menuButton.addEventListener('click', () => {
+ if(menuButton.classList.contains('active')) { closeMenu(); return; }
+ menuButton.classList.add('active');menuButton.setAttribute('aria-expanded','true');menuButton.setAttribute('aria-label','メニューを閉じる'); navigation.classList.add('open');navigation.inert=false;overlay.hidden=false;document.body.classList.add('menu-open');
+});
+overlay.addEventListener('click',closeMenu);
+navigation.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&menuButton.classList.contains('active')){closeMenu();menuButton.focus();}
+ if(e.key==='Tab'&&menuButton.classList.contains('active')){
+  const focusables=[menuButton,...navigation.querySelectorAll('a')];
+  const first=focusables[0],last=focusables[focusables.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+ }
+});
+const titles={A:'糸リフト6本 ＋ ヒアルロン酸1cc',B:'糸リフト6本 ＋ ポテンツァ',C:'貴族リフト ＋ 医療ハイフ'};
+const cases=[
+ ...Array.from({length:6},(_,i)=>({set:['A','B','C'][i%3],name:titles[['A','B','C'][i%3]],image:'ai-case-'+(i+1)+'.png',ai:true}))
+];
+const list=document.getElementById('case-list');
+for(const [index,item] of cases.entries()){
+ const id='case-'+index;
+ const card=document.createElement('article');card.className='case-card';card.dataset.set=item.set;
+ const caption=`<div class="case-caption"><span>${item.set}</span><div><h3>${item.name}</h3><small>AI生成 / 実際の患者様ではありません</small></div></div>`;
+ card.innerHTML=caption+`<div class="comparison photo-comparison" id="comparison-${id}" aria-label="AI比較デモ。画像上を左右にドラッグできます"><div class="compare-after"><img src="${item.image}" alt="AI生成の同一女性のAfter側の比較デモ。施術効果ではありません" loading="lazy" draggable="false"><span class="image-label">AFTER / DEMO</span></div><div class="compare-before"><img src="${item.image}" alt="AI生成の同一女性のBefore側の比較デモ。実際の患者様ではありません" loading="lazy" draggable="false"><span class="image-label">BEFORE / DEMO</span></div><span class="demo-watermark">AI GENERATED / 比較デモ</span><div class="split-line"></div></div><div class="comparison-controls"><label for="slider-${id}">写真上をドラッグしてBefore / Afterを比較</label><input type="range" id="slider-${id}" min="0" max="100" value="50" aria-label="${item.set}セットのAI比較デモ" aria-controls="comparison-${id}"><output class="comparison-output" for="slider-${id}"></output><div class="compare-buttons"><button type="button" data-position="100" aria-pressed="false">Before</button><button type="button" data-position="50" aria-pressed="true">比較</button><button type="button" data-position="0" aria-pressed="false">After</button></div></div><p class="case-details">AI生成のレイアウト見本です。<br>施術による変化・効果を示す写真ではありません。</p>`;
+ list.appendChild(card);
+ const stage=card.querySelector('.comparison'),range=card.querySelector('input'),output=card.querySelector('output'),buttons=card.querySelectorAll('[data-position]');
+ const update=raw=>{const value=Math.round(Math.min(100,Math.max(0,Number(raw))));stage.style.setProperty('--split',value+'%');range.value=String(value);range.setAttribute('aria-valuetext',`Before ${value}%、After ${100-value}%`);output.textContent=`BEFORE ${value}% / AFTER ${100-value}%`;buttons.forEach(b=>{const selected=Number(b.dataset.position)===value;b.classList.toggle('selected',selected);b.setAttribute('aria-pressed',String(selected));});};
+ range.addEventListener('input',e=>update(e.target.value));buttons.forEach(b=>b.addEventListener('click',()=>update(b.dataset.position)));
+ let dragging=false;
+ const updateFromPointer=e=>{const rect=stage.getBoundingClientRect();if(rect.width>0)update((e.clientX-rect.left)/rect.width*100);};
+ stage.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;dragging=true;stage.setPointerCapture?.(e.pointerId);updateFromPointer(e);});
+ stage.addEventListener('pointermove',e=>{if(dragging)updateFromPointer(e);});
+ for(const type of ['pointerup','pointercancel','lostpointercapture'])stage.addEventListener(type,()=>{dragging=false;});
+ update(50);
+}
+const dots=document.querySelector('.carousel-dots'),count=document.querySelector('.carousel-count');
+let current=0;
+const visibleCards=()=>[...list.querySelectorAll('.case-card')].filter(c=>!c.hidden);
+const reduced=()=>window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+function renderPosition(){const visible=visibleCards();count.textContent=`${String(current+1).padStart(2,'0')} / ${String(visible.length).padStart(2,'0')}`;dots.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('active',i===current);b.setAttribute('aria-current',i===current?'true':'false');});}
+function goTo(index){const visible=visibleCards();if(!visible.length)return;current=(index+visible.length)%visible.length;const card=visible[current];list.scrollTo({left:card.offsetLeft-visible[0].offsetLeft,behavior:reduced()?'instant':'smooth'});renderPosition();}
+function resetCarousel(){current=0;dots.replaceChildren();visibleCards().forEach((card,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`${i+1}枚目の写真を見る`);b.addEventListener('click',()=>goTo(i));dots.appendChild(b);});list.scrollTo({left:0,behavior:'instant'});renderPosition();}
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(other=>{const active=other===button;other.classList.toggle('active',active);other.setAttribute('aria-pressed',String(active));});list.querySelectorAll('.case-card').forEach(card=>card.hidden=button.dataset.filter!=='all'&&card.dataset.set!==button.dataset.filter);resetCarousel();}));
+document.querySelector('.carousel-prev').addEventListener('click',()=>goTo(current-1));document.querySelector('.carousel-next').addEventListener('click',()=>goTo(current+1));
+list.addEventListener('keydown',e=>{if(e.target!==list)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();goTo(current+(e.key==='ArrowRight'?1:-1));}});
+list.addEventListener('scroll',()=>{const visible=visibleCards();const edge=list.getBoundingClientRect().left;let closest=0,distance=Infinity;visible.forEach((card,i)=>{const d=Math.abs(card.getBoundingClientRect().left-edge);if(d<distance){distance=d;closest=i;}});current=closest;renderPosition();},{passive:true});
+resetCarousel();
+const carousel=document.querySelector('.case-carousel');
+const autoplayButton=document.querySelector('.carousel-autoplay');
+let autoplay=!reduced(),inView=!('IntersectionObserver' in window),hovering=false,focused=false,pointerActive=false;
+let lastAdvance=Date.now(),resumeAfter=0;
+function delayAutoplay(){resumeAfter=Date.now()+10000;}
+function syncAutoplayButton(){autoplayButton.textContent=autoplay?'Ⅱ 自動再生を停止':'▷ 自動再生を開始';autoplayButton.setAttribute('aria-label',autoplay?'症例の自動再生を一時停止':'症例の自動再生を開始');autoplayButton.setAttribute('aria-pressed',String(!autoplay));count.setAttribute('aria-live',autoplay?'off':'polite');}
+autoplayButton.addEventListener('click',()=>{autoplay=!autoplay;lastAdvance=Date.now();syncAutoplayButton();});
+carousel.addEventListener('mouseenter',()=>{hovering=true;});
+carousel.addEventListener('mouseleave',()=>{hovering=false;delayAutoplay();});
+carousel.addEventListener('focusin',e=>{focused=e.target!==autoplayButton;});
+carousel.addEventListener('focusout',e=>{focused=!!e.relatedTarget&&e.relatedTarget!==autoplayButton&&carousel.contains(e.relatedTarget);delayAutoplay();});
+carousel.addEventListener('pointerdown',()=>{pointerActive=true;delayAutoplay();});
+for(const type of ['pointerup','pointercancel'])document.addEventListener(type,()=>{if(pointerActive){pointerActive=false;delayAutoplay();}});
+for(const type of ['input','click','keydown','wheel'])carousel.addEventListener(type,delayAutoplay,{passive:true});
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',delayAutoplay));
+// Touch scrolling can continue after pointerup; restart the reading time on each scroll.
+list.addEventListener('scroll',()=>{lastAdvance=Date.now();},{passive:true});
+document.addEventListener('visibilitychange',()=>{lastAdvance=Date.now();});
+if('IntersectionObserver' in window){const viewObserver=new window.IntersectionObserver(entries=>{inView=entries[0].isIntersecting;if(inView)lastAdvance=Date.now();},{threshold:.25});viewObserver.observe(carousel);}
+window.setInterval(()=>{const now=Date.now();if(!autoplay||!inView||hovering||focused||pointerActive||document.hidden||visibleCards().length<2||now<resumeAfter||now-lastAdvance<6000)return;goTo(current+1);lastAdvance=now;},1000);
+syncAutoplayButton();
+// Scroll reveal is provided by the spring motion controller.
