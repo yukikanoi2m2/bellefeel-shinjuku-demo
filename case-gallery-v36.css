@@ -5,12 +5,9 @@
 .real-case-filters button[aria-pressed=true]{background:#567e96;color:#fff;border-color:#567e96}
 .real-case-filter-note{min-height:39px;margin:13px auto 0!important;color:#816e63;font-size:10px;line-height:1.8;text-align:left}
 .real-cases .real-case-carousel{margin-top:17px}
-.real-comparison.real-composite{aspect-ratio:.78;background:#e6e5e1}
-.real-composite .real-before-frame,.real-composite .real-after-frame{position:absolute;inset:0;overflow:hidden}
-.real-composite .real-after-frame{clip-path:inset(0 0 0 var(--split))}
-.real-composite .real-before-frame img,.real-composite .real-after-frame img{position:absolute;top:50%;width:200%;height:auto;max-width:none;display:block;transform:translateY(-50%);user-select:none;pointer-events:none}
-.real-composite .real-before-frame img{left:0}
-.real-composite .real-after-frame img{left:-100%}
+.real-case-photo{margin:0;background:#e6e5e1}
+.real-case-photo img{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain}
+.real-case-photo figcaption{padding:7px 10px;text-align:center;color:#867366;font-size:9px;letter-spacing:.04em;background:#f5f2ee}
 .real-case-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px 0;font-size:9px;color:#837268;text-align:left}
 .real-case-meta a{color:#4e7f9b;border-bottom:1px solid #9bb8c9;text-decoration:none;white-space:nowrap}
 .real-case-thumbs{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:thin;overscroll-behavior-x:contain;margin:21px -5px 0;padding:0 5px 8px}
