@@ -65,3 +65,29 @@
 .hero-copy>p.hero-origin{font-size:9px;letter-spacing:.15em;margin-bottom:22px}.reserve-bar{padding:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px))}.reserve-bar a{min-height:50px}
 :root{--page:480px;--motion-radius:25px}body:before{display:none}.lp-content,.header,.reserve-bar{max-width:480px}.hero-proof{margin-top:22px}.hero-proof>div,.hero-proof>a{padding:12px 7px}.hero-proof small{font-size:7px}.hero-proof strong{font-size:16px}.hero-proof strong em{font-size:9px}.hero-proof span{font-size:8px}.hero-signal{right:14px;bottom:33px;padding:10px 13px;gap:0}.hero-signal>span{font-size:7px}.hero-signal>b{font-size:13px}.hero-signal small{font-size:8px}.real-comparison{aspect-ratio:1.15}
 }
+/* Seoul × Japan opening: vivid editorial blue and terracotta. */
+.brand-intro { background:#f9f7f3; }
+.intro-field { background:#b1d7ec; opacity:.9; }
+.intro-field:nth-child(2) { background:#e9baa4; opacity:.9; }
+.intro-stage { width:min(91vw,490px); height:290px; }
+.intro-place { top:26%; font-size:clamp(35px,9vw,54px); font-weight:600; letter-spacing:-.07em; gap:14px; white-space:nowrap; }
+.intro-place small { font-weight:400; letter-spacing:.18em; font-size:9px; }
+.intro-seoul { left:0; color:#267398; }.intro-japan { right:0; color:#a34d35; }
+.intro-arrow { position:absolute; top:28%; z-index:2; font:clamp(31px,8vw,49px)/1 Georgia,serif; }
+.intro-arrow-right { left:37%; color:#267398; }.intro-arrow-left { right:37%; color:#a34d35; }
+.intro-orbit { border-color:#26739880; }.intro-orbit.second { border-color:#a34d3580; }
+.intro-result { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; opacity:0; pointer-events:none; }
+.intro-result>span { color:#a34d35; font:32px/1 Georgia,serif; margin-bottom:18px; }
+.intro-result strong { color:#267398; font:600 clamp(31px,8.3vw,43px)/1.25 Georgia,serif; letter-spacing:-.055em; white-space:nowrap; }
+.intro-result small { color:#a34d35; font:9px/1.5 Arial,sans-serif; letter-spacing:.15em; margin-top:19px; }
+.intro-caption { color:#385d70; }.intro-skip { color:#815c4d; }
+.offer:before { content:'3D'; color:#a9cee1; }
+body:before { content:'SEOUL'; }
+@media(max-width:767px) {
+ .intro-stage { width:90vw; height:250px; }
+ .intro-place { top:27%; font-size:clamp(29px,8vw,38px); }.intro-place small { font-size:7px; }
+ .intro-arrow { top:27%; font-size:32px; }.intro-arrow-right { left:36%; }.intro-arrow-left { right:36%; }
+ .intro-result strong { font-size:clamp(26px,7.6vw,34px); }
+ .intro-result small { font-size:7px; }
+}
+@media(prefers-reduced-motion:reduce) { .intro-result { opacity:1; } }

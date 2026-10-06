@@ -12,7 +12,7 @@
  async function openIntro(){
   if(media.matches||intro||typeof Element.prototype.animate!=='function')return;
   intro=document.createElement('div');intro.className='brand-intro';intro.setAttribute('role','dialog');intro.setAttribute('aria-modal','true');intro.setAttribute('aria-label','SeoulとJapanが出会う、Bellefeel × 4EVERのオープニング');
-  intro.innerHTML=`<div class="intro-field" aria-hidden="true"></div><div class="intro-field" aria-hidden="true"></div><div class="intro-stage"><div class="intro-orbit" aria-hidden="true"></div><div class="intro-orbit second" aria-hidden="true"></div><div class="intro-place intro-seoul">Seoul<small>KOREA / 4EVER</small></div><div class="intro-place intro-japan">Japan<small>TOKYO / BELLEFEEL</small></div></div><p class="intro-caption">TWO PERSPECTIVES. ONE BEAUTY.</p><button class="intro-skip" type="button">SKIP →</button>`;
+  intro.innerHTML=`<div class="intro-field" aria-hidden="true"></div><div class="intro-field" aria-hidden="true"></div><div class="intro-stage"><div class="intro-orbit" aria-hidden="true"></div><div class="intro-orbit second" aria-hidden="true"></div><div class="intro-place intro-seoul">SEOUL<small>KOREA / 4EVER</small></div><span class="intro-arrow intro-arrow-right" aria-hidden="true">→</span><span class="intro-arrow intro-arrow-left" aria-hidden="true">←</span><div class="intro-place intro-japan">JAPAN<small>TOKYO / BELLEFEEL</small></div><div class="intro-result"><span>＝</span><strong>3D PROCEDURE</strong><small>SKIN × STRUCTURE × INNER BEAUTY</small></div></div><p class="intro-caption">TWO PERSPECTIVES. ONE BEAUTY.</p><button class="intro-skip" type="button">SKIP →</button>`;
   document.body.appendChild(intro);
   for(const el of document.body.children){if(el!==intro&&['HEADER','MAIN','NAV','ASIDE'].includes(el.tagName)&&!el.inert){el.inert=true;el.setAttribute('data-intro-inert','');}}
   document.body.classList.add('intro-active');intro.querySelector('button').addEventListener('click',finish);
@@ -20,11 +20,13 @@
   failsafe=setTimeout(finish,11500);
   const animate=(el,frames,options)=>{const a=el.animate(frames,{fill:'both',easing:'cubic-bezier(.22,1,.36,1)',...options});animations.push(a);return a;};
   try{
-   const distance=Math.min(innerWidth*.21,170);
-   animate(intro.querySelector('.intro-seoul'),[{opacity:0,transform:'translateX(-55px)'},{opacity:1,transform:'translateX(0)',offset:.18},{opacity:1,transform:'translateX(0)',offset:.74},{opacity:0,transform:`translateX(${distance}px) scale(.8)`}],{duration:9000});
-   animate(intro.querySelector('.intro-japan'),[{opacity:0,transform:'translateX(55px)'},{opacity:1,transform:'translateX(0)',offset:.18},{opacity:1,transform:'translateX(0)',offset:.74},{opacity:0,transform:`translateX(${-distance}px) scale(.8)`}],{duration:9000,delay:220});
-   intro.querySelectorAll('.intro-orbit').forEach((el,i)=>animate(el,[{opacity:0,transform:`rotate(${i?35:-35}deg) scale(.75)`},{opacity:.75,offset:.4},{opacity:0,transform:`rotate(${i?-15:15}deg) scale(.45)`}],{duration:9200}));
-   const exit=animate(intro,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{delay:9000,duration:1000});
+   animate(intro.querySelector('.intro-seoul'),[{opacity:0,transform:'translateX(-35px)'},{opacity:1,transform:'translateX(0)',offset:.18},{opacity:1,transform:'translateX(0)',offset:.68},{opacity:0,transform:'translateX(52px)',offset:.82},{opacity:0}],{duration:9300});
+   animate(intro.querySelector('.intro-japan'),[{opacity:0,transform:'translateX(35px)'},{opacity:1,transform:'translateX(0)',offset:.18},{opacity:1,transform:'translateX(0)',offset:.68},{opacity:0,transform:'translateX(-52px)',offset:.82},{opacity:0}],{duration:9300});
+   animate(intro.querySelector('.intro-arrow-right'),[{opacity:0,transform:'translateX(-20px)'},{opacity:1,transform:'translateX(0)',offset:.28},{opacity:1,transform:'translateX(36px)',offset:.61},{opacity:0,transform:'translateX(49px)',offset:.72},{opacity:0}],{duration:9300});
+   animate(intro.querySelector('.intro-arrow-left'),[{opacity:0,transform:'translateX(20px)'},{opacity:1,transform:'translateX(0)',offset:.28},{opacity:1,transform:'translateX(-36px)',offset:.61},{opacity:0,transform:'translateX(-49px)',offset:.72},{opacity:0}],{duration:9300});
+   animate(intro.querySelector('.intro-result'),[{opacity:0,transform:'translateY(24px) scale(.94)'},{opacity:0,offset:.61},{opacity:1,transform:'translateY(0) scale(1)',offset:.77},{opacity:1}],{duration:9300});
+   intro.querySelectorAll('.intro-orbit').forEach((el,i)=>animate(el,[{opacity:0,transform:`rotate(${i?35:-35}deg) scale(.75)`},{opacity:.65,offset:.4},{opacity:.22,transform:`rotate(${i?-15:15}deg) scale(.6)`}],{duration:9300}));
+   const exit=animate(intro,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{delay:9300,duration:1000});
    await exit.finished;finish();
   }catch{finish();}
  }
