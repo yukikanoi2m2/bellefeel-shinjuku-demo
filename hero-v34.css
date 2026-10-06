@@ -1,0 +1,37 @@
+/* Campaign-forward first view while retaining the editorial palette. */
+.hero-v34{background:#f9f5ef}
+.hero-v34 .hero-headline{padding:27px 20px 24px;background:#faf8f4;text-align:center}
+.hero-v34 .hero-headline .hero-english{font:500 27px/1.03 Georgia,serif;letter-spacing:-.035em;color:#527f9c;margin:0 0 16px;text-transform:uppercase}
+.hero-v34 .hero-headline .hero-english span{display:block;color:#ad6550}
+.hero-v34 .hero-headline h1{font-size:26px;line-height:1.42;letter-spacing:-.06em;color:#5c4c43}
+.hero-v34 .hero-headline .hero-partners{margin:13px 0 0;color:#a75f49;font:10px/1.5 Arial,sans-serif;letter-spacing:.16em}
+.hero-v34 .hero-stage{height:405px;background:#eee7e3}
+.hero-v34 .hero-stage:before{display:none}
+.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;transform-origin:center 55%;animation:hero-v34-float 9s ease-in-out infinite alternate}
+.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{z-index:1;opacity:0;pointer-events:none;mask-image:radial-gradient(ellipse 14% 7% at 39% 43%,#000 45%,transparent 100%),radial-gradient(ellipse 14% 7% at 62% 43%,#000 45%,transparent 100%)}
+.hero-v34 .hero-model-glance{animation:hero-v34-float 9s ease-in-out infinite alternate,hero-v34-glance 13s linear infinite}
+.hero-v34 .hero-model-blink{animation:hero-v34-float 9s ease-in-out infinite alternate,hero-v34-blink 6.7s linear infinite}
+.hero-v34 .hero-stage-tag{top:13px;bottom:auto;left:14px;padding:7px 10px;font-size:9px;background:#faf7f0d9;color:#9b5a46}
+.hero-v34 .hero-stage-note{bottom:9px;right:10px;background:#faf7f0e8}
+.hero-v34 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#faf7f1;border-top:1px solid #d7c2b3;border-bottom:1px solid #d7c2b3}
+.hero-v34 .hero-stats>a{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px 3px 12px;min-width:0;color:#7b5a4c;text-decoration:none;text-align:center;position:relative}
+.hero-v34 .hero-stats>a+a{border-left:1px solid #d7c2b3}
+.hero-v34 .hero-stats strong{font:400 30px/1 Georgia,serif;letter-spacing:-.055em;color:#a85c45;white-space:nowrap}
+.hero-v34 .hero-stats strong em{font:15px/1 Georgia,serif;font-style:normal;letter-spacing:0}
+.hero-v34 .hero-stats small{font:8px/1.5 Arial,sans-serif;letter-spacing:.03em;color:#6e7778;margin:7px 0 2px}
+.hero-v34 .hero-stats span{font:8px/1.3 Arial,sans-serif;color:#9b8273}
+.hero-v34 .hero-stats a:hover{background:#eaf1f3}
+.hero-v34 .hero-campaign{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:5px 12px;align-items:center;padding:20px 22px 22px;background:#e4eef3;color:#74564a}
+.hero-v34 .hero-campaign small{grid-column:1/-1;color:#527f9c;font:10px/1.4 Arial,sans-serif;letter-spacing:.16em}
+.hero-v34 .hero-campaign b{font-size:14px;font-weight:500;line-height:1.45}
+.hero-v34 .hero-campaign strong{font:400 28px/1 Georgia,serif;color:#a85c45;white-space:nowrap}
+.hero-v34 .hero-campaign strong em{font:12px Georgia,serif;font-style:normal}
+.hero-v34 .hero-campaign a{grid-column:1/-1;color:#527f9c;text-decoration:none;font:11px/1.5 Arial,sans-serif;border-bottom:1px solid #a6c1cf;padding:5px 0;width:max-content}
+.hero-v34 .hero-campaign p{grid-column:1/-1;font-size:9px;line-height:1.5;margin:0;color:#897a71}
+body:before{content:"BELLEFEEL × 4EVER  /  SEOUL · SHINJUKU";display:block;position:fixed;top:42%;left:0;right:0;z-index:-1;color:#fff8;font:clamp(28px,3vw,55px)/1 Georgia,serif;letter-spacing:.025em;text-align:center;pointer-events:none}
+@keyframes hero-v34-float{from{transform:translate3d(var(--hero-x,0px),var(--hero-y,0px),0) scale(1)}to{transform:translate3d(var(--hero-x,0px),calc(var(--hero-y,0px) - 3px),0) scale(1.01)}}
+@keyframes hero-v34-glance{0%,27%,45%,100%{opacity:0}31%,40%{opacity:1}}
+@keyframes hero-v34-blink{0%,38%,42%,100%{opacity:0}39.4%,40.2%{opacity:1}}
+@media(max-width:480px){.hero-v34 .hero-headline{padding-top:24px}.hero-v34 .hero-headline .hero-english{font-size:25px}.hero-v34 .hero-stage{height:390px}.hero-v34 .hero-stats strong{font-size:27px}.hero-v34 .hero-stats strong em{font-size:13px}.hero-v34 .hero-stats small{font-size:7px}.hero-v34 .hero-stats span{font-size:7px}}
+@media(max-width:359px){.hero-v34 .hero-headline .hero-english{font-size:23px}.hero-v34 .hero-headline h1{font-size:23px}.hero-v34 .hero-stage{height:360px}.hero-v34 .hero-campaign{padding-inline:15px}.hero-v34 .hero-campaign b{font-size:12px}.hero-v34 .hero-campaign strong{font-size:24px}}
+@media(prefers-reduced-motion:reduce){.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{animation:none!important;transform:none!important}.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{opacity:0!important}}
