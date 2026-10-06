@@ -7,10 +7,15 @@
 .hero-v34 .hero-headline .hero-partners{margin:13px 0 0;color:#a75f49;font:10px/1.5 Arial,sans-serif;letter-spacing:.16em}
 .hero-v34 .hero-stage{height:405px;position:relative;overflow:hidden;isolation:isolate;background:#eee7e3}
 .hero-v34 .hero-stage:before{display:none}
-.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;transform-origin:center 55%;animation:hero-v34-float 9s ease-in-out infinite alternate}
-.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{z-index:1;opacity:0;pointer-events:none;mask-image:radial-gradient(ellipse 14% 8% at 39% 48%,#000 45%,transparent 100%),radial-gradient(ellipse 14% 8% at 62% 48%,#000 45%,transparent 100%)}
+.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-glance-left,.hero-v34 .hero-model-blink{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 36%;transform-origin:center 55%;animation:hero-v34-float 9s ease-in-out infinite alternate}
+.hero-v34 .hero-model-glance,.hero-v34 .hero-model-glance-left,.hero-v34 .hero-model-blink{z-index:1;opacity:0;pointer-events:none;mask-image:radial-gradient(ellipse 14% 8% at 39% 48%,#000 45%,transparent 100%),radial-gradient(ellipse 14% 8% at 62% 48%,#000 45%,transparent 100%)}
 .hero-v34 .hero-model-glance{animation:hero-v34-float 9s ease-in-out infinite alternate,hero-v34-glance 13s linear infinite}
+.hero-v34 .hero-model-glance-left{animation:hero-v34-float-flip 9s ease-in-out infinite alternate}
 .hero-v34 .hero-model-blink{animation:hero-v34-float 9s ease-in-out infinite alternate,hero-v34-blink 6.7s linear infinite}
+.hero-v34 .hero-stage[data-gaze] .hero-model-glance{animation:hero-v34-float 9s ease-in-out infinite alternate;opacity:0;transition:opacity .45s ease}
+.hero-v34 .hero-stage[data-gaze="right"] .hero-model-glance{opacity:.9}
+.hero-v34 .hero-stage[data-gaze="left"] .hero-model-glance-left{opacity:.82}
+.hero-v34 .hero-stage[data-gaze] .hero-model-glance-left{transition:opacity .45s ease}
 .hero-v34 .hero-stage-tag{position:absolute;z-index:2;top:13px;left:14px;padding:7px 10px;font-size:9px;background:#faf7f0d9;color:#9b5a46}
 .hero-v34 .hero-stage-note{position:absolute;z-index:2;bottom:9px;right:10px;margin:0;padding:3px 5px;font-size:8px;background:#faf7f0e8}
 .hero-v34 .hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#faf7f1;border-top:1px solid #d7c2b3;border-bottom:1px solid #d7c2b3}
@@ -30,14 +35,15 @@
 .hero-v34 .hero-campaign p{grid-column:1/-1;font-size:9px;line-height:1.5;margin:0;color:#897a71}
 body:before{content:"BELLEFEEL × 4EVER  /  SEOUL · SHINJUKU";display:block;position:fixed;top:42%;left:0;right:0;z-index:-1;color:#fff8;font:clamp(28px,3vw,55px)/1 Georgia,serif;letter-spacing:.025em;text-align:center;pointer-events:none}
 @keyframes hero-v34-float{from{transform:translate3d(var(--hero-x,0px),var(--hero-y,0px),0) scale(1)}to{transform:translate3d(var(--hero-x,0px),calc(var(--hero-y,0px) - 3px),0) scale(1.01)}}
+@keyframes hero-v34-float-flip{from{transform:translate3d(var(--hero-x,0px),var(--hero-y,0px),0) scaleX(-1)}to{transform:translate3d(var(--hero-x,0px),calc(var(--hero-y,0px) - 3px),0) scaleX(-1.01)}}
 @keyframes hero-v34-glance{0%,27%,45%,100%{opacity:0}31%,40%{opacity:1}}
 @keyframes hero-v34-blink{0%,38%,42%,100%{opacity:0}39.4%,40.2%{opacity:1}}
 @media(max-width:480px){.hero-v34 .hero-headline{padding-top:24px}.hero-v34 .hero-headline .hero-english{font-size:25px}.hero-v34 .hero-stage{height:390px}.hero-v34 .hero-stats strong{font-size:27px}.hero-v34 .hero-stats strong em{font-size:13px}.hero-v34 .hero-stats small{font-size:7px}.hero-v34 .hero-stats span{font-size:7px}}
 @media(max-width:359px){.hero-v34 .hero-headline .hero-english{font-size:23px}.hero-v34 .hero-headline h1{font-size:23px}.hero-v34 .hero-stage{height:360px}.hero-v34 .hero-campaign{padding-inline:15px}.hero-v34 .hero-campaign b{font-size:12px}.hero-v34 .hero-campaign strong{font-size:24px}}
-@media(prefers-reduced-motion:reduce){.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{animation:none!important;transform:none!important}.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{opacity:0!important}}
+@media(prefers-reduced-motion:reduce){.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-glance-left,.hero-v34 .hero-model-blink{animation:none!important;transform:none!important}.hero-v34 .hero-model-glance,.hero-v34 .hero-model-glance-left,.hero-v34 .hero-model-blink{opacity:0!important}}
 /* Editorial key visual: portrait and compact evidence share the image frame. */
 .hero-v34 .hero-stage{position:relative;overflow:hidden;isolation:isolate;background:#e8ded6}
-.hero-v34 .hero-stage .hero-model,.hero-v34 .hero-stage .hero-model-glance,.hero-v34 .hero-stage .hero-model-blink{width:76%;height:100%;max-width:none;object-fit:cover;object-position:53% 32%}
+.hero-v34 .hero-stage .hero-model,.hero-v34 .hero-stage .hero-model-glance,.hero-v34 .hero-stage .hero-model-glance-left,.hero-v34 .hero-stage .hero-model-blink{width:76%;height:100%;max-width:none;object-fit:cover;object-position:53% 32%}
 .hero-v34 .hero-stage:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,transparent 45%,#ede3da66 68%,#f9f5eee6 82%,#faf7f1 100%);pointer-events:none}
 .hero-v34 .hero-stage .hero-stats{position:absolute;z-index:3;right:0;top:36px;bottom:31px;width:39%;display:flex;flex-direction:column;align-items:stretch;justify-content:center;background:transparent;border:0;gap:0}
 .hero-v34 .hero-stage .hero-stats>a{flex:1;padding:7px 7px 8px;background:transparent;border:0!important;border-top:1px solid #ad8e7a88!important}
