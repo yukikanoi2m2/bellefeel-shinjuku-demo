@@ -18,7 +18,7 @@
   for(const el of document.body.children){if(el!==intro&&['HEADER','MAIN','NAV','ASIDE'].includes(el.tagName)&&!el.inert){el.inert=true;el.setAttribute('data-intro-inert','');}}
   document.body.classList.add('intro-active');intro.querySelector('button').addEventListener('click',finish);
   intro.querySelector('button').focus({preventScroll:true});
-  failsafe=setTimeout(finish,4800);
+  failsafe=setTimeout(finish,6000);
   const animate=(el,frames,options)=>{const a=el.animate(frames,{fill:'both',easing:'cubic-bezier(.22,1,.36,1)',...options});animations.push(a);return a;};
   try{
    const distance=Math.min(innerWidth*.21,170);
@@ -26,7 +26,7 @@
    animate(intro.querySelector('.intro-japan'),[{opacity:0,transform:'translateX(55px)'},{opacity:1,transform:'translateX(0)'},{opacity:1,transform:'translateX(0)',offset:.48},{opacity:0,transform:`translateX(${-distance}px) scale(.8)`}],{duration:1550,delay:100});
    intro.querySelectorAll('.intro-orbit').forEach((el,i)=>animate(el,[{opacity:0,transform:`rotate(${i?35:-35}deg) scale(.75)`},{opacity:.75,offset:.4},{opacity:0,transform:`rotate(${i?-15:15}deg) scale(.45)`}],{duration:1950}));
    animate(intro.querySelector('.intro-brand'),[{opacity:0,transform:'translateY(22px) scale(.94)'},{opacity:1,transform:'translateY(0) scale(1)'}],{delay:1300,duration:650});
-   const exit=animate(intro,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{delay:2600,duration:800});
+   const exit=animate(intro,[{clipPath:'inset(0 0 0 0)'},{clipPath:'inset(0 0 100% 0)'}],{delay:3700,duration:800});
    await exit.finished;finish();
   }catch{finish();}
  }
