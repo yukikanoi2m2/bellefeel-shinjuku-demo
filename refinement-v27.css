@@ -91,3 +91,17 @@ body:before { content:'SEOUL'; }
  .intro-result small { font-size:7px; }
 }
 @media(prefers-reduced-motion:reduce) { .intro-result { opacity:1; } }
+/* Subtle portrait life: image-aligned gaze and blink overlays, no full-face morph. */
+.hero-visual>img.hero-face-base,.hero-visual>img.hero-face-glance,.hero-visual>img.hero-face-blink { transform-origin:50% 65%; animation:hero-breathe 8s ease-in-out infinite; will-change:transform; }
+.hero-visual>img.hero-face-glance,.hero-visual>img.hero-face-blink { pointer-events:none; opacity:0; z-index:1; box-shadow:none; mask-image:radial-gradient(ellipse 13% 7% at 39% 48%,#000 55%,transparent 100%),radial-gradient(ellipse 13% 7% at 62% 48%,#000 55%,transparent 100%); }
+.hero-visual>img.hero-face-glance { animation:hero-breathe 8s ease-in-out infinite,hero-glance 13s linear infinite; }
+.hero-visual>img.hero-face-blink { animation:hero-breathe 8s ease-in-out infinite,hero-blink 6.7s linear infinite; }
+@keyframes hero-breathe { 0%,100% {transform:translate3d(var(--hero-x,0px),calc(var(--hero-y,0px) + 1px),0)} 50% {transform:translate3d(var(--hero-x,0px),calc(var(--hero-y,0px) - 2px),0)} }
+@keyframes hero-glance { 0%,27%,45%,100% {opacity:0} 31%,40% {opacity:1} }
+@keyframes hero-blink { 0%,38%,42%,100% {opacity:0} 39.4%,40.2% {opacity:1} }
+.hero-image-note { color:#978b82; font-size:9px; margin:0 auto 5px!important; text-align:center; }
+.hero-activated .reserve-bar .line { animation:line-soft-pulse 1.4s 1.8s ease-out 1; }
+@keyframes line-soft-pulse { 0%,100% {filter:brightness(1);box-shadow:none} 45% {filter:brightness(1.14);box-shadow:0 0 0 8px #73a88725} }
+.hero-activated .hero-brand .header-forever-crop:after { content:""; position:absolute; inset:0; z-index:2; pointer-events:none; background:linear-gradient(110deg,transparent 38%,#ffffff80 49%,transparent 60%); transform:translateX(-120%); animation:hero-logo-shine 1.4s 2.2s ease-in-out 1; }
+@keyframes hero-logo-shine { to {transform:translateX(130%)} }
+@media(prefers-reduced-motion:reduce) { .hero-visual>img.hero-face-base,.hero-visual>img.hero-face-glance,.hero-visual>img.hero-face-blink { animation:none!important; transform:none!important; }.hero-visual>img.hero-face-glance,.hero-visual>img.hero-face-blink { opacity:0!important; }.hero-activated .reserve-bar .line,.hero-activated .hero-brand .header-forever-crop:after { animation:none!important; } }
