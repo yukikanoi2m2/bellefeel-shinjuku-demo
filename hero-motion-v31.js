@@ -1,6 +1,6 @@
 /* Ambient hero motion; all movement stops for reduced-motion visitors. */
 (()=>{
- const hero=document.querySelector('.hero-visual');
+ const hero=document.querySelector('.hero-stage');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  if(!hero||reduced.matches)return;
  const activate=()=>document.body.classList.add('hero-activated');
