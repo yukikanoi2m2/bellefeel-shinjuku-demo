@@ -32,8 +32,12 @@
  }
  document.addEventListener('keydown',e=>{if(!intro)return;if(e.key==='Escape')finish();if(e.key==='Tab'){e.preventDefault();intro.querySelector('button').focus();}});
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&intro)finish();});media.addEventListener('change',()=>{if(media.matches)finish();});
- // First visit per tab. Footer replay makes the storyboard easy to review.
- try{if(!sessionStorage.getItem('bellefeel-intro-v21')&&!location.hash){sessionStorage.setItem('bellefeel-intro-v21','1');openIntro();}}catch{if(!location.hash)openIntro();}
+ // Play on every full page load. Wait for a background tab to become visible
+ // so its timeout cannot end the opening before the visitor sees it.
+ if(document.hidden){
+  const onVisible=()=>{if(document.hidden)return;document.removeEventListener('visibilitychange',onVisible);openIntro();};
+  document.addEventListener('visibilitychange',onVisible);
+ }else openIntro();
  const replay=document.createElement('button');replay.className='intro-replay';replay.type='button';replay.textContent='オープニングをもう一度見る';replay.addEventListener('click',openIntro);document.querySelector('footer').appendChild(replay);
  // Placeholder links respond accessibly and leave actual treatment URLs easy to replace.
  const dialog=document.createElement('dialog');dialog.className='treatment-dialog';document.body.appendChild(dialog);
