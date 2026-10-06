@@ -3,8 +3,7 @@
 const realCases = [
   {name:'HIFU / ハイフ', before:'case01-01.webp', after:'case01-02.webp'},
   {name:'THREAD LIFT / 糸リフト', before:'case02-01.webp', after:'case02-02.webp'},
-  {name:'LIPOSUCTION / 脂肪吸引', before:'case03-01.webp', after:'case03-02.webp'},
-  {name:'FACE LIFT / フェイスリフト', before:'case04-01.webp', after:'case04-02.webp'}
+  {name:'LIPOSUCTION / 脂肪吸引', before:'case03-01.webp', after:'case03-02.webp'}
 ];
 const realTrack = document.getElementById('real-case-track');
 const realCount = document.querySelector('.real-case-count');
