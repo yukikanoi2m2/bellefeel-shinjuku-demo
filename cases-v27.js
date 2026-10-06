@@ -26,7 +26,7 @@ function renderRealCase(){
   realCount.textContent=`${String(realPosition+1).padStart(2,'0')} / ${String(realVisible.length).padStart(2,'0')}`;
   realThumbs.innerHTML=realVisible.map((n,j)=>`<button type="button" class="real-case-thumb ${j===realPosition?'is-active':''}" aria-label="症例${j+1}：${realCases[n].name}" aria-current="${j===realPosition?'true':'false'}" data-position="${j}"><img src="${caseBase+realCases[n].image}" alt="" loading="lazy" decoding="async"><small>${String(j+1).padStart(2,'0')}</small></button>`).join('');
   realThumbs.querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{realPosition=Number(button.dataset.position);renderRealCase();}));
-  realThumbs.querySelector('.is-active')?.scrollIntoView({block:'nearest',inline:'nearest',behavior:realReduced.matches?'instant':'smooth'});
+  realThumbs.scrollTo({left:Math.max(0,realPosition*76-100),behavior:realReduced.matches?'instant':'smooth'});
 }
 function setRealCategory(category){
   realVisible=realCases.map((item,i)=>category==='all'||item.tags.includes(category)?i:-1).filter(i=>i>=0);realPosition=0;
