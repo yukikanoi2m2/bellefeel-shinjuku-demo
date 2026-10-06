@@ -35,3 +35,18 @@ body:before{content:"BELLEFEEL × 4EVER  /  SEOUL · SHINJUKU";display:block;pos
 @media(max-width:480px){.hero-v34 .hero-headline{padding-top:24px}.hero-v34 .hero-headline .hero-english{font-size:25px}.hero-v34 .hero-stage{height:390px}.hero-v34 .hero-stats strong{font-size:27px}.hero-v34 .hero-stats strong em{font-size:13px}.hero-v34 .hero-stats small{font-size:7px}.hero-v34 .hero-stats span{font-size:7px}}
 @media(max-width:359px){.hero-v34 .hero-headline .hero-english{font-size:23px}.hero-v34 .hero-headline h1{font-size:23px}.hero-v34 .hero-stage{height:360px}.hero-v34 .hero-campaign{padding-inline:15px}.hero-v34 .hero-campaign b{font-size:12px}.hero-v34 .hero-campaign strong{font-size:24px}}
 @media(prefers-reduced-motion:reduce){.hero-v34 .hero-model,.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{animation:none!important;transform:none!important}.hero-v34 .hero-model-glance,.hero-v34 .hero-model-blink{opacity:0!important}}
+/* Editorial key visual: portrait and compact evidence share the image frame. */
+.hero-v34 .hero-stage{position:relative;overflow:hidden;isolation:isolate;background:#e8ded6}
+.hero-v34 .hero-stage .hero-model,.hero-v34 .hero-stage .hero-model-glance,.hero-v34 .hero-stage .hero-model-blink{width:76%;height:100%;max-width:none;object-fit:cover;object-position:53% 32%}
+.hero-v34 .hero-stage:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,transparent 45%,#ede3da66 68%,#f9f5eee6 82%,#faf7f1 100%);pointer-events:none}
+.hero-v34 .hero-stage .hero-stats{position:absolute;z-index:3;right:0;top:36px;bottom:31px;width:39%;display:flex;flex-direction:column;align-items:stretch;justify-content:center;background:transparent;border:0;gap:0}
+.hero-v34 .hero-stage .hero-stats>a{flex:1;padding:7px 7px 8px;background:transparent;border:0!important;border-top:1px solid #ad8e7a88!important}
+.hero-v34 .hero-stage .hero-stats>a:last-child{border-bottom:1px solid #ad8e7a88!important}
+.hero-v34 .hero-stage .hero-stats strong{font-size:38px;color:#a2543d;text-shadow:0 1px 1px #fff9}
+.hero-v34 .hero-stage .hero-stats strong em{font-size:14px}
+.hero-v34 .hero-stage .hero-stats small{font-size:9px;line-height:1.4;color:#6d5146;margin:3px 0 0}
+.hero-v34 .hero-stage .hero-stats span{font-size:8px;color:#967b6d}
+.hero-v34 .hero-stage-tag{max-width:54%;background:#fbf7f1ee;font-weight:500;line-height:1.45}
+.hero-v34 .hero-stage-note{font-size:7px}
+@media(max-width:480px){.hero-v34 .hero-stage{height:405px}.hero-v34 .hero-stage .hero-stats{top:38px;bottom:29px}.hero-v34 .hero-stage .hero-stats strong{font-size:33px}.hero-v34 .hero-stage .hero-stats small{font-size:8px}}
+@media(max-width:359px){.hero-v34 .hero-stage{height:370px}.hero-v34 .hero-stage .hero-stats{top:42px;bottom:25px}.hero-v34 .hero-stage .hero-stats strong{font-size:29px}.hero-v34 .hero-stage .hero-stats small{font-size:7px}.hero-v34 .hero-stage-tag{font-size:8px}}
